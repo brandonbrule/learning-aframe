@@ -64,11 +64,12 @@ https://aframe.io/docs/0.3.0/core/asset-management-system.html
 
 ##Lighting
 I only had luck with the default <a-light> element which is like a source from the sun.  You can control it's position and colour in the sky casting different shadows across your scene.
-https://aframe.io/docs/0.3.0/components/light.html http://localhost/www/aframe/4-lighting/
+https://aframe.io/docs/0.3.0/components/light.html
 
 
 ##Animations
 We can animate each entity by nesting a custom animation element inside an a-entity element.  The animation property names are influenced by CSS animations and supports animating things like color, position, opacity, delays, duration, and number of repeats.
+https://aframe.io/docs/0.3.0/core/animations.html
 
 
 ##Dynamic
@@ -77,11 +78,13 @@ We can dynamically create a-frame elements like any regular html element.  we ca
 
 ##External Models
 This is a little town that was built in a voxel editing program VoxelMagica, It's been imported into a-frame and we can move around and add lighting to the scene that holds the model.
+https://aframe.io/docs/0.3.0/guides/building-with-magicavoxel.html
 
 
 ##Place It.
 Tiny little scene builder
 
 
-Extras
+##Extras
+Really cool work by Don McCurdy
 https://github.com/donmccurdy/aframe-extras
