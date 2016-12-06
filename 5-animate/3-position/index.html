@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>a-entity animate</title>
+  <script src='https://aframe.io/releases/0.3.0/aframe.min.js'></script>
+
+  <style>
+  pre{
+    position:fixed;
+    top: 0;
+    font-size:1.5rem;
+    padding: 10px!important;
+    margin: 0;
+    border: none!important;
+  }
+  </style>
+</head>
+
+<body>
+<pre class="prettyprint">
+&#x3C;a-entity geometry=&#x22;primitive: box&#x22; material=&#x22;color: red&#x22;&#x3E;
+  &#x3C;a-animation 
+    attribute=&#x22;position&#x22; 
+    from=&#x22;-10 3 -8&#x22; to=&#x22;4 0 -4&#x22;
+    repeat=&#x22;indefinite&#x22;&#x3E;
+  &#x3C;/a-animation&#x3E;
+&#x3C;/a-entity&#x3E;
+</pre>
+<a-scene>
+  <a-entity geometry="primitive: box" material="color: red">
+    <a-animation attribute="position" from="-10 3 -8" to="4 0 -4" repeat="indefinite"></a-animation>
+  </a-entity>
+</a-scene>
+
+
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+</body>
+</html>

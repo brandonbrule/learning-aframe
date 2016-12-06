@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>a-box - a-frame</title>
+  <script src='https://aframe.io/releases/0.3.0/aframe.min.js'></script>
+  <style>
+  pre{position: fixed;bottom: 0; z-index:100;font-size: 1.5rem;background: rgba(255,255,255,1); opacity: 0; padding:0.5rem;}pre:hover{opacity: 1}
+  </style>
+</head>
+
+<body>
+<pre class="prettyprint">
+&#x3C;a-scene&#x3E;
+
+  &#x3C;a-entity camera position=&#x22;1 0.5 8&#x22;&#x3E;
+    &#x3C;a-animation 
+      attribute=&#x22;position&#x22;
+      dur=&#x22;2000&#x22;
+      easing=&#x22;linear&#x22;
+      to=&#x22;1 0.5 -1.5&#x22;&#x3E;
+    &#x3C;/a-animation&#x3E;
+  &#x3C;/a-entity&#x3E;
+
+  &#x3C;a-assets&#x3E;
+    &#x3C;img id=&#x22;leaves&#x22; src=&#x22;../../images/leaves.png&#x22;&#x3E;
+    &#x3C;img id=&#x22;wood&#x22; src=&#x22;../../images/wood-log.png&#x22;&#x3E;
+    &#x3C;img id=&#x22;pig&#x22; src=&#x22;../../images/pig.png&#x22;&#x3E;
+    &#x3C;img id=&#x22;grass&#x22; src=&#x22;../../images/grass.png&#x22;&#x3E;
+  &#x3C;/a-assets&#x3E;
+
+  &#x3C;a-sphere position=&#x22;-1 2.5 -3&#x22; radius=&#x22;1.25&#x22; src=&#x22;#leaves&#x22;&#x3E;&#x3C;/a-sphere&#x3E;
+  &#x3C;a-box position=&#x22;-1 0.5 -3&#x22; rotation=&#x22;0 45 0&#x22; width=&#x22;1&#x22; height=&#x22;1&#x22; depth=&#x22;1&#x22; src=&#x22;#wood&#x22;&#x3E;&#x3C;/a-box&#x3E;
+  &#x3C;a-box position=&#x22;-1 1.5 -3&#x22; rotation=&#x22;0 45 0&#x22; width=&#x22;1&#x22; height=&#x22;1&#x22; depth=&#x22;1&#x22; src=&#x22;#wood&#x22;&#x3E;&#x3C;/a-box&#x3E;
+  &#x3C;a-image position=&#x22;1 0.5 -3&#x22; src=&#x22;#pig&#x22;&#x3E;&#x3C;/a-image&#x3E;
+  &#x3C;a-plane position=&#x22;0 0 -4&#x22; rotation=&#x22;-90 0 0&#x22; width=&#x22;25&#x22; height=&#x22;25&#x22; src=&#x22;#grass&#x22;&#x3E;&#x3C;/a-plane&#x3E;
+  &#x3C;a-sky color=&#x22;#7daaff&#x22;&#x3E;&#x3C;/a-sky&#x3E;
+
+&#x3C;/a-scene&#x3E;
+</pre>
+<a-scene>
+  <a-assets style="display:none">
+    <img id="leaves" src="../../images/leaves.png">
+    <img id="wood" src="../../images/wood-log.png">
+    <img id="pig" src="../../images/pig.png">
+    <img id="grass" src="../../images/grass.png">
+  </a-assets>
+
+  <a-sphere position="-1 2.5 -3" radius="1.25" src="#leaves"></a-sphere>
+  <a-box position="-1 0.5 -3" rotation="0 45 0" width="1" height="1" depth="1" src="#wood"></a-box>
+  <a-box position="-1 1.5 -3" rotation="0 45 0" width="1" height="1" depth="1" src="#wood"></a-box>
+  <a-image position="1 0.5 -3" src="#pig"></a-image>
+  <a-plane position="0 0 -4" rotation="-90 0 0" width="25" height="25" src="#grass"></a-plane>
+  <a-sky color="#7daaff"></a-sky>
+
+  <a-entity camera position="1 0.5 8">
+    <a-animation 
+      attribute="position"
+      dur="2000"
+      easing="linear"
+      repeat="indefinite"
+      to="1 0.5 -1.5">
+    </a-animation>
+  </a-entity>
+</a-scene>
+
+
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+</body>
+</html>

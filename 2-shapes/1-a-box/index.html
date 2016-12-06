@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>a-box - a-frame</title>
+  <script src='https://aframe.io/releases/0.3.2/aframe.min.js'></script>
+  <style>
+  pre{
+  	position:fixed;
+  	top: 0;
+  	font-size:1.5rem;
+  	padding: 10px!important;
+    margin: 0;
+    border: none!important;
+  }
+  </style>
+</head>
+
+<body>
+<pre class="prettyprint">
+&#x3C;a-scene&#x3E;
+	&#x3C;a-box depth=&#x22;1&#x22; color=&#x22;#6173F4&#x22;&#x3E;&#x3C;/a-box&#x3E;
+&#x3C;/a-scene&#x3E;
+</pre>
+<a-scene>
+  <a-box position="0 0.5 -4" depth="1" color="#6173F4"></a-box>
+</a-scene>
+
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+</body>
+</html>

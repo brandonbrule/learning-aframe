@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Creating Dynamic Elements</title>
+  <style>
+  pre{
+  	position:fixed;
+  	top: 40px;
+  	font-size:1.5rem;
+  	padding: 10px!important;
+    margin: 0;
+    border: none!important;
+  }
+  </style>
+</head>
+
+<body>
+<button style="font-size:2rem;">New</button>
+<pre class="prettyprint">
+var scene = document.getElementsByTagName(&#x27;a-scene&#x27;)[0];
+
+
+document.body.addEventListener(&#x27;click&#x27;, function(e){
+  if(e.target.nodeName === &#x27;BUTTON&#x27;){
+    var box = document.createElement(&#x27;a-entity&#x27;);
+    var animation = document.createElement(&#x27;a-animation&#x27;);
+    
+    box.setAttribute(&#x27;width&#x27;, &#x27;1&#x27;);
+    box.setAttribute(&#x27;height&#x27;, &#x27;1&#x27;);
+    box.setAttribute(&#x27;geometry&#x27;, &#x27;primitive: box&#x27;);
+    box.setAttribute(&#x27;depth&#x27;, &#x27;1&#x27;);
+    box.setAttribute(&#x27;color&#x27;, &#x27;#6173F4&#x27;);
+
+    animation.setAttribute(&#x27;attribute&#x27;, &#x27;position&#x27;);
+    animation.setAttribute(&#x27;from&#x27;, &#x27;-10 3 -8&#x27;);
+    animation.setAttribute(&#x27;to&#x27;, &#x27;10 3 -8&#x27;);
+    animation.setAttribute(&#x27;repeat&#x27;, &#x27;indefinite&#x27;);
+
+    box.appendChild(animation);
+    scene.appendChild(box);
+  }
+});
+</pre>
+<a-scene></a-scene>
+
+
+<script src='http://brandonbrule.github.io/itsa/js/itsa.js'></script>
+<script>
+var scene = document.getElementsByTagName('a-scene')[0];
+
+document.body.addEventListener('click', function(e){
+  if(e.target.nodeName === 'BUTTON'){
+    var box = document.createElement('a-entity');
+    var animation = document.createElement('a-animation');
+    box.setAttribute('width', '1');
+    box.setAttribute('height', '1');
+    box.setAttribute('geometry', 'primitive: box');
+    box.setAttribute('depth', '1');
+    box.setAttribute('color', '#6173F4');
+
+    animation.setAttribute('attribute', 'position');
+    animation.setAttribute('from', '-10 3 -8');
+    animation.setAttribute('to', '10 3 -8');
+    animation.setAttribute('repeat', 'indefinite');
+
+    box.appendChild(animation);
+    scene.appendChild(box);
+  }
+});
+</script>
+
+<script src='https://aframe.io/releases/0.3.2/aframe.min.js'></script>
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+</body>
+</html>

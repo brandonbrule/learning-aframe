@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Position</title>
+  <style>
+  body{color:#111;}
+  nav{position:absolute; top:0; left: 0; width:100%;z-index: 10;}
+  ul{margin:0;padding:0;}
+  li{display: inline-block;}
+  button{
+    width: 50px;
+  }
+  button img{
+    max-width: 100%;
+  }
+  </style>
+</head>
+
+<body>
+  <nav>
+  <ul class="controls">
+      <li><input type="range" min="-2" max="3" step="1" value="0" its-control="pos-x"></li>
+      <li><input type="range" min="1" max="5" step="1" value="1" its-control="pos-y"></li>
+      <li><input type="range" min="-10" max="-1" step="1" value="-10" its-control="pos-z"></li>
+  </ul>
+  
+  <button its-control="texture" value="mason-brick"><img src="../images/mason-brick.png">Brick</button>
+  <button its-control="texture" value="cobblestone"><img src="../images/cobblestone.png">Stone</button>
+  <button its-control="texture" value="leaves"><img src="../images/leaves.png">Leaves</button>
+  <button its-control="texture" value="wood-log"><img src="../images/wood-log.png">Log</button>
+  <button its-control="texture" value="wooden-plank"><img src="../images/wooden-plank.png">Wood</button>
+
+        
+  <button its-control="add-new">Add(Q)</button>
+  
+</nav>
+<a-scene>
+  <a-box position="0 1 -10" rotation="0 0 0" width="1" height="1" depth="1" src="../images/wooden-plank.png"></a-box>
+  <a-plane position="0 0.5 -4" rotation="-90 0 0" width="20" height="20" src="../images/grass.png"></a-plane>
+  <a-sky color="#7daaff"></a-sky>
+</a-scene>
+
+<script src='https://aframe.io/releases/0.3.2/aframe.min.js'></script>
+<script src='https://brandonbrule.github.io/itsa/js/itsa.js'></script>
+<script src="https://brandonbrule.github.io/its-framework/js/actions.js"></script>
+<script src="../../its-framework/js/dispatcher.js"></script>
+<script src="../../its-framework/js/stores/state.js"></script>
+<script src="https://brandonbrule.github.io/its-framework/js/stores/views.js"></script>
+<script>
+
+var select = document.getElementsByTagName('select')[0];
+
+
+// -- Store -- //
+// Store Rules **
+// Every module must go through the store
+// Every module must be served the event data
+// Your module must decide what's important
+var Store = (function() {
+  
+
+  // All Modules
+  // Are Purely Optional
+  // Add your own Functions
+  // Your funtion must determine if data matters
+  var init = function(data) {
+
+    // State Module
+    // State of all its-control
+    var state = State.init(data);
+    
+    // Update its-view elements 
+    // with coorisponding control value.
+    UpdateBox.init(data, state);
+
+
+
+    
+  };
+
+  return {
+    init: init
+  };
+
+})();
+</script>
+
+<script>
+var UpdateBox = (function() {
+  var box = document.getElementsByTagName('a-box')[0];
+
+  var init = function(data, state) {
+
+    if (data.control === 'texture'){
+      box.setAttribute('src', '../images/'+state['texture']+'.png');
+      data.element.blur();
+    }
+
+    
+    if(data.control === 'add-new' || data.key === 81 ){
+      box = document.createElement('a-box');
+      box.setAttribute('width', '1');
+      box.setAttribute('height', '1');
+      box.setAttribute('depth', '1');
+      box.setAttribute('src', '../images/'+state['texture']+'.png');
+    }
+
+
+
+    if(data.event_type === 'keyup'){
+      switch(data.key) {
+
+          // Left Arrow
+          case 37:
+              state['pos-x'] = parseInt(state['pos-x']) - 1;
+              break;
+
+          // Right Arrow
+          case 39:
+              state['pos-x'] = parseInt(state['pos-x']) + 1;
+              break;
+
+          // Up Arrow
+          case 38:
+              state['pos-z'] = parseInt(state['pos-z']) - 1;
+              break;
+
+          // Down Arrow
+          case 40:
+              state['pos-z'] = parseInt(state['pos-z']) + 1;
+              break;
+
+          // ] Arrow
+          case 219:
+              state['pos-y'] = parseInt(state['pos-y']) + 1;
+              break;
+
+          // [ Arrow
+          case 221:
+              state['pos-y'] = parseInt(state['pos-y']) - 1;
+              break;
+
+          default:
+             break;
+      }
+    }
+
+
+    if(data.type === 'range'){
+      box.setAttribute('position', state['pos-x'] + ' ' + state['pos-y'] + ' ' + state['pos-z'] );
+    }
+
+
+    // Move Around
+    box.setAttribute('position', state['pos-x'] + ' ' + state['pos-y'] + ' ' + state['pos-z']);
+
+    //its.a(data);
+    if(data.control === 'add-new' || data.key === 81 ){
+      document.getElementsByTagName('a-scene')[0].appendChild(box);
+    }
+
+
+  };
+
+  return {
+    init: init
+  };
+
+})();
+</script>
+
+</body>
+</html>

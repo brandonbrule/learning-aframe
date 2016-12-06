@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Lighting</title>
+  <style>
+  body{color:#111;}
+  nav{position:absolute; top:0; left: 0;z-index: 10;padding:1.5rem;}
+  ul{margin:0;padding:0;list-style: none;}
+  li{
+    margin: 10px 0;
+  }
+  span{
+    font-weight: 800;
+    color:#fff;
+  }
+  pre{position: fixed;bottom: 0; z-index:100;font-size: 1.5rem;background: rgba(255,255,255,1); opacity: 0; padding:0.5rem;}pre:hover{opacity: 1}
+  </style>
+</head>
+
+<body>
+  <nav>
+    <input style="width:450px; font-size:1.35rem" disabled id="show-position">
+    <ul class="controls">
+        <li><span>X</span> <input type="range" min="-360" max="360" step="5" value="-240" its-control="pos-x"><span its-view="pos-x">-360</span></li>
+        <li><span>Y</span> <input type="range" min="-360" max="360" step="5" value="25" its-control="pos-y"><span its-view="pos-y">100</span></li>
+        <li><span>Z</span> <input type="range" min="-360" max="360" step="5" value="-280" its-control="pos-z"><span its-view="pos-z">-10</span></li>
+    </ul>
+  </nav>
+
+<pre class="prettyprint">
+&#x3C;a-scene&#x3E;
+  &#x3C;a-assets style=&#x22;display:none&#x22;&#x3E;
+    &#x3C;img id=&#x22;leaves&#x22; src=&#x22;../images/leaves.png&#x22;&#x3E;
+    &#x3C;img id=&#x22;wood&#x22; src=&#x22;../images/wood-log.png&#x22;&#x3E;
+    &#x3C;img id=&#x22;pig&#x22; src=&#x22;../images/pig.png&#x22;&#x3E;
+    &#x3C;img id=&#x22;grass&#x22; src=&#x22;../images/grass.png&#x22;&#x3E;
+  &#x3C;/a-assets&#x3E;
+
+  &#x3C;a-light color=&#x22;#1e2035&#x22; position=&#x22;x y z&#x22; intensity=&#x22;1&#x22;&#x3E;&#x3C;/a-light&#x3E;
+
+  &#x3C;a-sphere position=&#x22;-1 2.5 -3&#x22; radius=&#x22;1.25&#x22; src=&#x22;#leaves&#x22;&#x3E;&#x3C;/a-sphere&#x3E;
+  &#x3C;a-box position=&#x22;-1 0.5 -3&#x22; rotation=&#x22;0 45 0&#x22; width=&#x22;1&#x22; height=&#x22;1&#x22; depth=&#x22;1&#x22; src=&#x22;#wood&#x22;&#x3E;&#x3C;/a-box&#x3E;
+  &#x3C;a-box position=&#x22;-1 1.5 -3&#x22; rotation=&#x22;0 45 0&#x22; width=&#x22;1&#x22; height=&#x22;1&#x22; depth=&#x22;1&#x22; src=&#x22;#wood&#x22;&#x3E;&#x3C;/a-box&#x3E;
+  &#x3C;a-box position=&#x22;1 0.5 -3&#x22; rotation=&#x22;0 45 0&#x22; width=&#x22;1&#x22; height=&#x22;1&#x22; depth=&#x22;1&#x22; src=&#x22;#leaves&#x22;&#x3E;&#x3C;/a-box&#x3E;
+  &#x3C;a-plane position=&#x22;0 0 -4&#x22; rotation=&#x22;-90 0 0&#x22; width=&#x22;10&#x22; height=&#x22;10&#x22; src=&#x22;#grass&#x22;&#x3E;&#x3C;/a-plane&#x3E;
+  
+  &#x3C;a-sky src=&#x22;../images/bg.jpg&#x22;&#x3E;&#x3C;/a-sky&#x3E;
+&#x3C;/a-scene&#x3E;
+</pre>
+<a-scene>
+  <a-assets style="display:none">
+    <img id="leaves" src="../images/leaves.png">
+    <img id="wood" src="../images/wood-log.png">
+    <img id="pig" src="../images/pig.png">
+    <img id="grass" src="../images/grass.png">
+  </a-assets>
+
+  <a-sphere position="-1 2.5 -3" radius="1.25" src="#leaves"></a-sphere>
+  <a-box position="-1 0.5 -3" rotation="0 45 0" width="1" height="1" depth="1" src="#wood"></a-box>
+  <a-box position="-1 1.5 -3" rotation="0 45 0" width="1" height="1" depth="1" src="#wood"></a-box>
+  <a-box position="1 0.5 -3" rotation="0 45 0" width="1" height="1" depth="1" src="#leaves"></a-box>
+  <a-plane position="0 0 -4" rotation="-90 0 0" width="10" height="10" src="#grass"></a-plane>
+  <a-light color="#1e2035" position="-240 25 -280" intensity="1"></a-light>
+  <a-sky src="../images/bg.jpg"></a-sky>
+</a-scene>
+
+<script src='https://aframe.io/releases/0.3.2/aframe.min.js'></script>
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+<script src='https://brandonbrule.github.io/itsa/js/itsa.js'></script>
+<script src="https://brandonbrule.github.io/its-framework/js/actions.js"></script>
+<script src="https://brandonbrule.github.io/its-framework/js/dispatcher.js"></script>
+<script>
+// -- Store -- //
+// Store Rules **
+// Every module must go through the store
+// Every module must be served the event data
+// Your module must decide what's important
+var Store = (function() {
+  
+
+  // All Modules
+  // Are Purely Optional
+  // Add your own Functions
+  // Your funtion must determine if data matters
+  var init = function(data) {
+
+    // State Module
+    // State of all its-control
+    var state = State.init(data);
+
+    Views.init(data);
+    
+    // Update its-view elements 
+    // with coorisponding control value.
+    UpdateBox.init(data, state);
+
+    
+  };
+
+  return {
+    init: init
+  };
+
+})();
+</script>
+<script src="https://brandonbrule.github.io/its-framework/js/stores/state.js"></script>
+<script src="https://brandonbrule.github.io/its-framework/js/stores/views.js"></script>
+<script>
+var UpdateBox = (function() {
+  var box = document.getElementsByTagName('a-light')[0];
+  var pre = document.getElementById('show-position');
+
+  var init = function(data, state) {
+
+
+    if(data.type === 'range'){
+      box.setAttribute('position', state['pos-x'] + ' ' + state['pos-y'] + ' ' + state['pos-z'] );
+      pre.value = '<a-light position="' + state['pos-x'] + ' ' + state['pos-y'] + ' ' + state['pos-z'] +'"></a-light>';
+    }
+
+    if(data.event_type === 'load'){
+      pre.value = '<a-light position="' + state['pos-x'] + ' ' + state['pos-y'] + ' ' + state['pos-z'] +'"></a-light>';
+    }
+
+  };
+
+  return {
+    init: init
+  };
+
+})();
+</script>
+
+</body>
+</html>

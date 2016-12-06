@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Creating Dynamic Elements</title>
+</head>
+
+<body>
+
+<a-scene></a-scene>
+
+
+<script src='http://brandonbrule.github.io/itsa/js/itsa.js'></script>
+<script>
+var scene = document.getElementsByTagName('a-scene')[0];
+var hue = 1;
+document.body.addEventListener('click', function(e){
+	var box = document.createElement('a-box');
+	var rand = Math.floor(Math.random() * 6) + 1;
+	var rand2 = Math.floor(Math.random() * 6) + 1;
+	var rand3 = Math.floor(Math.random() * 6) + 1;
+	box.setAttribute('width', '1');
+	box.setAttribute('height', '1');
+	box.setAttribute('position', rand + ' '+rand2+ ' -' + rand3);
+	box.setAttribute('rotation', '0 45 0');
+	box.setAttribute('depth', '1');
+	box.setAttribute('color', 'hsl('+hue+', 100%, 50%)')
+		hue = hue + 1;
+	scene.appendChild(box);
+});
+</script>
+
+<script src='https://aframe.io/releases/0.3.2/aframe.min.js'></script>
+</body>
+</html>

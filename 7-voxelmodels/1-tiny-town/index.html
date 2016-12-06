@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
+    <script src="https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js"></script>
+  </head>
+  <style>
+  pre{position: fixed;bottom: 0; z-index:100;font-size: 1.5rem;background: rgba(255,255,255,1); opacity: 0; padding:0.5rem;}pre:hover{opacity: 1}
+  </style>
+  <body>
+    <pre class="prettyprint">
+&#x3C;a-scene&#x3E;
+
+  &#x3C;a-assets&#x3E;
+    &#x3C;a-asset-item id=&#x22;myPlyModel&#x22; src=&#x22;tiny-town.ply&#x22;&#x3E;&#x3C;/a-asset-item&#x3E;
+  &#x3C;/a-assets&#x3E;
+
+  &#x3C;a-entity ply-model=&#x22;src: #myPlyModel&#x22; position=&#x22;-15 -3 15&#x22; rotation=&#x22;-90 0 0&#x22;&#x3E;&#x3C;/a-entity&#x3E;
+
+  &#x3C;a-sky src=&#x22;../../images/sky2.jpg&#x22;&#x3E;&#x3C;/a-sky&#x3E;
+  
+&#x3C;/a-scene&#x3E;
+    </pre>
+    <a-scene>
+      <a-assets>
+        <a-asset-item id="myPlyModel" src="tiny-town.ply"></a-asset-item>
+      </a-assets>
+      <a-entity ply-model="src: #myPlyModel" position="-15 -3 15" rotation="-90 0 0"></a-entity>
+       <a-sky src="../../images/sky2.jpg"></a-sky>
+    </a-scene>
+
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+  </body>
+</html>

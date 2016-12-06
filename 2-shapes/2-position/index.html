@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Position</title>
+  <style>
+  body{color:#111;}
+  nav{position:absolute; top:0; left: 0;z-index: 10;padding:1.5rem;}
+  ul{margin:0;padding:0;list-style: none;}
+  li{
+    margin: 10px 0;
+  }
+  span{
+    font-weight: 800;
+  }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <input style="width:400px; font-size:1.35rem" disabled id="show-position">
+    <ul class="controls">
+        <li><span>X</span> <input type="range" min="-3" max="3" step="0.5" value="0" its-control="pos-x"><span its-view="pos-x">0</span></li>
+        <li><span>Y</span> <input type="range" min="0" max="3" step="0.5" value="0.5" its-control="pos-y"><span its-view="pos-y">0.5</span></li>
+        <li><span>Z</span> <input type="range" min="-10" max="-3" step="0.5" value="-10" its-control="pos-z"><span its-view="pos-z">-10</span></li>
+    </ul>
+  </nav>
+
+
+<a-scene>
+  <a-box position="0 0.5 -10" width="1" height="1" depth="1" color="#6173F4"></a-box>
+</a-scene>
+
+<script src='https://aframe.io/releases/0.3.2/aframe.min.js'></script>
+<script src='https://brandonbrule.github.io/itsa/js/itsa.js'></script>
+<script src="https://brandonbrule.github.io/its-framework/js/actions.js"></script>
+<script src="https://brandonbrule.github.io/its-framework/js/dispatcher.js"></script>
+<script>
+// -- Store -- //
+// Store Rules **
+// Every module must go through the store
+// Every module must be served the event data
+// Your module must decide what's important
+var Store = (function() {
+  
+
+  // All Modules
+  // Are Purely Optional
+  // Add your own Functions
+  // Your funtion must determine if data matters
+  var init = function(data) {
+
+    // State Module
+    // State of all its-control
+    var state = State.init(data);
+
+    Views.init(data);
+    
+    // Update its-view elements 
+    // with coorisponding control value.
+    UpdateBox.init(data, state);
+
+    
+  };
+
+  return {
+    init: init
+  };
+
+})();
+</script>
+<script src="https://brandonbrule.github.io/its-framework/js/stores/state.js"></script>
+<script src="https://brandonbrule.github.io/its-framework/js/stores/views.js"></script>
+<script>
+var UpdateBox = (function() {
+  var box = document.getElementsByTagName('a-box')[0];
+  var pre = document.getElementById('show-position');
+
+  var init = function(data, state) {
+
+
+    if(data.type === 'range'){
+      box.setAttribute('position', state['pos-x'] + ' ' + state['pos-y'] + ' ' + state['pos-z'] );
+      pre.value = '<a-box position="' + state['pos-x'] + ' ' + state['pos-y'] + ' ' + state['pos-z'] +'"></a-box>';
+    }
+
+    if(data.event_type === 'load'){
+      pre.value = '<a-box position="' + state['pos-x'] + ' ' + state['pos-y'] + ' ' + state['pos-z'] +'"></a-box>';
+    }
+
+  };
+
+  return {
+    init: init
+  };
+
+})();
+</script>
+
+</body>
+</html>
